@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BDDEMPRESA" Class="DCEmpresaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=charlie\sqlexpress;Initial Catalog=BDDEMPRESA;Integrated Security=True" SettingsObjectName="AccesoDatos.Properties.Settings" SettingsPropertyName="BDDEMPRESAConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_capacitacion" Member="tbl_capacitacions">
+    <Type Name="tbl_capacitacion">
+      <Column Name="id_capacitacion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion_capacitacion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_capacitacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_capacitacion" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="id_empleado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_empleado_tbl_capacitacion" Member="tbl_empleado" ThisKey="id_empleado" OtherKey="id_empleado" Type="tbl_empleado" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_usuario" Member="tbl_usuarios">
+    <Type Name="tbl_usuario">
+      <Column Name="id_usuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombres_usuario" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="dni_usuario" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="email_usuario" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="pass_usuario" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_usuario" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_usuario" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="id_rol" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_rol_tbl_usuario" Member="tbl_rol" ThisKey="id_rol" OtherKey="id_rol" Type="tbl_rol" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_cargos" Member="tbl_cargos">
+    <Type Name="tbl_cargo">
+      <Column Name="id_cargos" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion_cargos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_cargos" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_cargos" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_cargo_tbl_empleado" Member="tbl_empleados" ThisKey="id_cargos" OtherKey="id_cargos" Type="tbl_empleado" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_departamento" Member="tbl_departamentos">
+    <Type Name="tbl_departamento">
+      <Column Name="id_departamento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion_departamento" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_departamento" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_departamento" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="id_empresa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_departamento_tbl_empleado" Member="tbl_empleados" ThisKey="id_departamento" OtherKey="id_departamento" Type="tbl_empleado" />
+      <Association Name="tbl_empresa_tbl_departamento" Member="tbl_empresa" ThisKey="id_empresa" OtherKey="id_empresa" Type="tbl_empresa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_empleado" Member="tbl_empleados">
+    <Type Name="tbl_empleado">
+      <Column Name="id_empleado" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombres_empleado" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="dni_empleado" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion_empleado" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="telefono_empleado" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="email_empleado" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fechanac_empleado" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="foto_empleado" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_empleado" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_empleado" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="id_departamento" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_cargos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_empleado_tbl_capacitacion" Member="tbl_capacitacions" ThisKey="id_empleado" OtherKey="id_empleado" Type="tbl_capacitacion" />
+      <Association Name="tbl_empleado_tbl_familiar" Member="tbl_familiars" ThisKey="id_empleado" OtherKey="id_empleado" Type="tbl_familiar" />
+      <Association Name="tbl_empleado_tbl_referencia" Member="tbl_referencias" ThisKey="id_empleado" OtherKey="id_empleado" Type="tbl_referencia" />
+      <Association Name="tbl_departamento_tbl_empleado" Member="tbl_departamento" ThisKey="id_departamento" OtherKey="id_departamento" Type="tbl_departamento" IsForeignKey="true" />
+      <Association Name="tbl_cargo_tbl_empleado" Member="tbl_cargo" ThisKey="id_cargos" OtherKey="id_cargos" Type="tbl_cargo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_empresa" Member="tbl_empresas">
+    <Type Name="tbl_empresa">
+      <Column Name="id_empresa" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ruc_empresa" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="nombre_empresa" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion_empresa" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono_empresa" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_empresa" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_empresa" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_empresa_tbl_departamento" Member="tbl_departamentos" ThisKey="id_empresa" OtherKey="id_empresa" Type="tbl_departamento" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_familiar" Member="tbl_familiars">
+    <Type Name="tbl_familiar">
+      <Column Name="id_familiar" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombres_familiar" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="dni_familiar" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion_familiar" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="telefono_familiar" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="fecha_familiar" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_familiar" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="id_empleado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_empleado_tbl_familiar" Member="tbl_empleado" ThisKey="id_empleado" OtherKey="id_empleado" Type="tbl_empleado" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_referencias" Member="tbl_referencias">
+    <Type Name="tbl_referencia">
+      <Column Name="id_referencias" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombres_referencias" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="dni_referencias" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono_referencias" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_referencias" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_referencias" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="id_empleado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_empleado_tbl_referencia" Member="tbl_empleado" ThisKey="id_empleado" OtherKey="id_empleado" Type="tbl_empleado" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_rol" Member="tbl_rols">
+    <Type Name="tbl_rol">
+      <Column Name="id_rol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion_rol" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_rol" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado_rol" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_rol_tbl_usuario" Member="tbl_usuarios" ThisKey="id_rol" OtherKey="id_rol" Type="tbl_usuario" />
+    </Type>
+  </Table>
+</Database>
